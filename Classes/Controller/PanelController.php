@@ -74,7 +74,7 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 	 * @param TypoScriptFrontendController $controller an instance of the frontend controller
 	 */
 	public function evaluateRenderingOptions($parameters, $controller) {
-		// @todo: rework this functioality to use the configuration service
+		// @todo: rework this functionality to use the configuration service
 		// Backend user preview features:
 		if ($this->enableAdminPanel) {
 			$this->controller->fePreview = (bool)$this->backendUser->adminPanel->extGetFeAdminValue('preview');
@@ -149,14 +149,17 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 		}
 
 		$content = array(
-			'formUrl'            => \TYPO3\CMS\Backend\Utility\BackendUtility::getAjaxUrl('AdminPanel::options'),
-			'isAdministrator'    => $backendUserIsLoggedIn && $this->backendUser->isAdmin(),
-			'currentPageLink'    => GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'),
+			'isAdministrator' => $backendUserIsLoggedIn && $this->backendUser->isAdmin(),
+			'currentPageLink' => GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'),
 			'applicationVersion' => TYPO3_version,
-			'displayLoginLink'   => $showLoginWhenNotLoggedIn,
-			'displayLogoutLink'  => $backendUserIsLoggedIn,
-			'loginUrl'           => $this->controller->absRefPrefix . TYPO3_mainDir . 'index.php?redirect_url=' . rawurlencode(GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL')),
-			'logoutUrl'          => $this->controller->absRefPrefix . TYPO3_mainDir . 'logout.php?redirect=' . rawurlencode(GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL')),
+			'displayLoginLink' => $showLoginWhenNotLoggedIn,
+			'displayLogoutLink' => $backendUserIsLoggedIn,
+			'form' => GeneralUtility::makeInstance(\TYPO3\CMS\Adminpanel\Domain\Model\Dto\Form::class),
+			'urls' => array(
+				'form' => BackendUtility::getAjaxUrl('AdminPanel::options'),
+				'login' => $this->controller->absRefPrefix . TYPO3_mainDir . 'index.php?redirect_url=' . rawurlencode(GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL')),
+				'logout' => $this->controller->absRefPrefix . TYPO3_mainDir . 'logout.php?redirect=' . rawurlencode(GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL')),
+			)
 		);
 
 		$this->view->assignMultiple($content);
@@ -183,14 +186,14 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 
 
 		$content = array(
-			'pageId'          => $this->controller->id,
-			'pageType'        => $this->controller->type,
-			'pageTitle'       => $this->controller->page['title'],
-			'rootLine'        => implode(' / ', $rootLine),
+			'pageId' => $this->controller->id,
+			'pageType' => $this->controller->type,
+			'pageTitle' => $this->controller->page['title'],
+			'rootLine' => implode(' / ', $rootLine),
 			'scriptParseTime' => $this->controller->scriptParseTime,
-			'loggedInUser'    => $loggedInUser,
-			'loggedInGroups'  => $loggedInGroups,
-			'isCached'        => (bool)!$this->controller->no_cache,
+			'loggedInUser' => $loggedInUser,
+			'loggedInGroups' => $loggedInGroups,
+			'isCached' => (bool)!$this->controller->no_cache,
 			'nonCacheableObjects' => count($this->controller->config['INTincScript'])
 		);
 		$this->view->assignMultiple(array('information' => $content));
@@ -217,10 +220,10 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 
 		$content['history'] = array(
 			'icon' => IconUtility::getSpriteIcon('actions-document-history-open', array('title' => 'Show History')),
-			'url'  => BackendUtility::getModuleUrl('record_history', array(
-				'element' => 'pages:' . $pageUid,
-				'returnUrl' => $returnUrl
-			)) . '#latest'
+			'url' => BackendUtility::getModuleUrl('record_history', array(
+					'element' => 'pages:' . $pageUid,
+					'returnUrl' => $returnUrl
+				)) . '#latest'
 		);
 
 		if ($perms & Permission::CONTENT_EDIT && $languageAllowed) {
@@ -233,14 +236,14 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 			}
 			$content['newContent'] = array(
 				'icon' => IconUtility::getSpriteIcon('actions-document-new', array('title' => 'Create New Content Element')),
-				'url'  => $newContentWizScriptPath . '&id=' . $pageUid . '&returnUrl=' . rawurlencode($returnUrl)
+				'url' => $newContentWizScriptPath . '&id=' . $pageUid . '&returnUrl=' . rawurlencode($returnUrl)
 			);
 		}
 
 		if ($perms & Permission::PAGE_NEW) {
 			$content['newPage'] = array(
 				'icon' => IconUtility::getSpriteIcon('actions-page-new', array('title' => 'New Page')),
-				'url'  => BackendUtility::getModuleUrl('db_new', array(
+				'url' => BackendUtility::getModuleUrl('db_new', array(
 					'id' => $pageUid,
 					'pagesOnly' => 1,
 					'returnUrl' => $returnUrl
@@ -251,7 +254,7 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 		if ($perms & Permission::PAGE_EDIT) {
 			$content['movePage'] = array(
 				'icon' => IconUtility::getSpriteIcon('actions-document-move', array('title' => 'Move Page')),
-				'url'  => BackendUtility::getModuleUrl('move_element', array(
+				'url' => BackendUtility::getModuleUrl('move_element', array(
 					'table' => 'pages',
 					'uid' => $pageUid,
 					'returnUrl' => $returnUrl
@@ -260,7 +263,7 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 
 			$content['editPageProperties'] = array(
 				'icon' => IconUtility::getSpriteIcon('actions-document-open', array('title' => 'Edit Page Properties')),
-				'url'  => BackendUtility::getModuleUrl('record_edit', array(
+				'url' => BackendUtility::getModuleUrl('record_edit', array(
 					'edit[pages][' . $pageUid . ']' => 'edit',
 					'noView' => 1,
 					'returnUrl' => $returnUrl
@@ -279,7 +282,7 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 				if (is_array($row)) {
 					$content['editTranslation'] = array(
 						'icon' => IconUtility::getSpriteIcon('mimetypes-x-content-page-language-overlay', array('title' => 'Edit Translation Record')),
-						'url'  => BackendUtility::getModuleUrl('record_edit', array(
+						'url' => BackendUtility::getModuleUrl('record_edit', array(
 							'edit[pages_language_overlay][' . $row['uid'] . ']' => 'edit',
 							'noView' => 1,
 							'returnUrl' => $returnUrl
@@ -292,7 +295,7 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 		if ($this->backendUser->check('modules', 'web_list')) {
 			$content['list'] = array(
 				'icon' => IconUtility::getSpriteIcon('actions-system-list-open', array('title' => 'Show list module')),
-				'url'  => BackendUtility::getModuleUrl('web_list', array(
+				'url' => BackendUtility::getModuleUrl('web_list', array(
 					'id' => $pageUid,
 					'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
 				))

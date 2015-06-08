@@ -13,6 +13,7 @@ namespace TYPO3\CMS\Adminpanel\Service;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Handles the logic for reading, updating and saving the options for the Admin Panel
@@ -20,14 +21,14 @@ namespace TYPO3\CMS\Adminpanel\Service;
  * Generally there is the following priority applied to the configuration options
  *
  * --- In the Frontend the option:
- * 	config.admPanel = 1
+ *    config.admPanel = 1
  * has to be enabled. Please note that this does not matter on certain occasions and could be enabled anyways all the time.
  *
  * --- For the Backend User Options:
  *
  * The following userTSconfig is available:
- * 	admPanel.preview = 1
- * 	admPanel...
+ *    admPanel.preview = 1
+ *    admPanel...
  *
  * Once changes to the options within the admin panel are made, the $BE_USER->uc['adminPanel'] stores the current state
  * of open or collapsed items and selected checkboxes.
@@ -52,15 +53,33 @@ class ConfigurationService {
 	 * @param \TYPO3\CMS\Core\Http\AjaxRequestHandler $requestHandler
 	 */
 	public function save($parameters, $requestHandler) {
-		$input = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('edit');
+		$input = GeneralUtility::_GP('edit');
+
+		$mapping = array(
+			'displayIcons' => 'edit_displayFieldIcons',
+			'displayEditPanels' => 'edit_displayIcons',
+			'showHiddenPages' => 'preview_showHiddenPages',
+			'showHiddenRecords' => 'preview_showHiddenRecords',
+			'simulateDate' => 'preview_simulateDate',
+			'simulateFrontendUserGroup' => 'preview_simulateUserGroup'
+		);
 
 		if (is_array($input)) {
+			$new = array();
+
 			$this->backendUser->uc['adminPanel'] = array_merge(is_array($this->backendUser->uc['adminPanel']) ? $this->backendUser->uc['adminPanel'] : array(), $input);
+			foreach ($input as $k => $v) {
+				if (isset($mapping[$k])) {
+					$input['TSFE_adminConfig'][$mapping[$k]] = $v;
+					$this->backendUser->uc['TSFE_adminConfig'][$mapping[$k]] = $v;
+				}
+			}
 			$this->backendUser->writeUC();
 			$requestHandler->setContent(array('success' => TRUE));
 		} else {
 			$requestHandler->setContent(array('error' => TRUE));
 		}
+		$requestHandler->setContent($input);
 		$requestHandler->setContentFormat('json');
 
 	}

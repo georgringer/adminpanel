@@ -1,97 +1,121 @@
 <div id="t3-panel-container">
-	<f:form action="#" id="t3-panel-wrap">
-		<f:form.hidden id="t3-url-ajax" name="url" value="{formUrl}" />
+	<f:form action="#" id="t3-panel-wrap" object="{form}" name="edit">
+		<f:form.hidden id="t3-url-ajax" name="url" value="{urls.form}" />
 		<div class="t3-pull-left t3-panel-logo-container">
 			<a href="{backendLink}"><img class="t3-panel-logo" src="typo3/gfx/typo3-topbar@2x.png"></a>
 		</div>
 		<f:if condition="{information}">
-		<ul class="t3-pull-left t3-panel-select">
-			<li class="t3-dropdown">
-				<a href="#" class="t3-dropdown-toggle t3-btn">Information</a>
-				<ul class="t3-dropdown-menu" style="width: 150px; display: none;">
-					<li class="t3-btn" data-target="#t3-panel-information">Information</li>
-					<li class="t3-btn" data-target="#t3-panel-previewedit">Preview & Editing</li>
-					<li class="t3-btn" data-target="#t3-panel-debug">TypoScript & Debug</li>
-				</ul>
-			</li>
-		</ul>
+			<ul class="t3-pull-left t3-panel-select">
+				<li class="t3-dropdown">
+					<a href="#" class="t3-dropdown-toggle t3-btn">Information</a>
+					<ul class="t3-dropdown-menu" style="width: 150px; display: none;">
+						<li class="t3-btn" data-target="#t3-panel-information">Information</li>
+						<li class="t3-btn" data-target="#t3-panel-previewedit">Preview & Editing</li>
+						<li class="t3-btn" data-target="#t3-panel-debug">TypoScript & Debug</li>
+					</ul>
+				</li>
+			</ul>
 		</f:if>
 		<f:if condition="{information}">
-		<ul class="t3-pull-left t3-panel" id="t3-panel-information">
-			<li>
-				Page "{information.pageTitle}" [ID: {information.pageId}, Type {information.pageType}]<br>
-				Rootline: {information.rootLine}
-			</li>
-			<li>
-				<f:if condition="{information.loggedInUser}">
-					<f:then>
-						Logged in as "{information.loggedInUser.username}" [ID: {information.loggedInUser.uid}]<br>
-						User Groups: None [{information.loggedInGroups}]
-					</f:then>
-					<f:else>
-						Not logged in<br>
-						User Groups: None [IDs: 0, -1]
-					</f:else>
+			<ul class="t3-pull-left t3-panel" id="t3-panel-information">
+				<li>
+					Page "{information.pageTitle}" [ID: {information.pageId}, Type {information.pageType}]<br> Rootline: {information.rootLine}
+				</li>
+				<li>
+					<f:if condition="{information.loggedInUser}">
+						<f:then>
+							Logged in as "{information.loggedInUser.username}" [ID: {information.loggedInUser.uid}]<br> User Groups: None [{information.loggedInGroups}]
+						</f:then>
+						<f:else>
+							Not logged in<br> User Groups: None [IDs: 0, -1]
+						</f:else>
+					</f:if>
+				</li>
+				<f:if condition="{isAdministrator}">
+					<li>
+						{information.scriptParseTime} ms render time (
+						<f:if condition="{information.isCached}">
+							<f:then>Fetched from cache</f:then>
+							<f:else>Page not cached</f:else>
+						</f:if>
+						)<br> {information.nonCacheableObjects} uncached objects found
+					</li>
+					<li>
+						<br> TYPO3 CMS {applicationVersion}
+					</li>
 				</f:if>
-			</li>
-			<f:if condition="{isAdministrator}">
-				<li>
-					{information.scriptParseTime} ms render time (<f:if condition="{information.isCached}"><f:then>Fetched from cache</f:then><f:else>Page not cached</f:else></f:if>)<br>
-					{information.nonCacheableObjects} uncached objects found
-				</li>
-				<li>
-					<br>
-					TYPO3 CMS {applicationVersion}
-				</li>
-			</f:if>
-		</ul>
+			</ul>
 		</f:if>
 
 		<ul class="t3-pull-left t3-panel" id="t3-panel-previewedit" style="xdisplay: none;">
 			<li>
-				TODO: Clear Cache Of This Page<br>
-				TODO: Clear <select><option>1</option><option>2</option><option>3</option></select> Levels down from this page
+				TODO: Clear Cache Of This Page<br> TODO: Clear <select>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+			</select> Levels down from this page
 			</li>
 			<li title="Editing">
-				<label><f:form.checkbox name="edit[displayIcons]" value="1" />Edit Icons</label><br>
-				<label><f:form.checkbox name="edit[displayEditPanels]" value="1" />Edit Panels</label>
+				<label>
+					<f:form.checkbox name="edit[displayIcons]" value="1" property="displayIcons" />
+					Edit Icons</label><br> <label>
+				<f:form.checkbox property="displayEditPanels" value="1" />
+				Edit Panels</label>
 			</li>
 			<li title="Editing">
-				<f:if condition="{edit.history}"><a href="{edit.history.url}"><f:format.raw>{edit.history.icon}</f:format.raw></a></f:if>
-				<f:if condition="{edit.newContent}"><a href="{edit.newContent.url}"><f:format.raw>{edit.newContent.icon}</f:format.raw></a></f:if>
-				<f:if condition="{edit.newPage}"><a href="{edit.newPage.url}"><f:format.raw>{edit.newPage.icon}</f:format.raw></a></f:if>
-				<f:if condition="{edit.movePage}"><a href="{edit.movePage.url}"><f:format.raw>{edit.movePage.icon}</f:format.raw></a></f:if>
-				<f:if condition="{edit.editPageProperties}"><a href="{edit.editPageProperties.url}"><f:format.raw>{edit.editPageProperties.icon}</f:format.raw></a></f:if>
-				<f:if condition="{edit.editTranslation}"><a href="{edit.editTranslation.url}"><f:format.raw>{edit.editTranslation.icon}</f:format.raw></a></f:if>
-				<f:if condition="{edit.list}"><a href="{edit.list.url}"><f:format.raw>{edit.list.icon}</f:format.raw></a></f:if>
+				<f:if condition="{edit.history}"><a href="{edit.history.url}">
+					<f:format.raw>{edit.history.icon}</f:format.raw>
+				</a></f:if>
+				<f:if condition="{edit.newContent}"><a href="{edit.newContent.url}">
+					<f:format.raw>{edit.newContent.icon}</f:format.raw>
+				</a></f:if>
+				<f:if condition="{edit.newPage}"><a href="{edit.newPage.url}">
+					<f:format.raw>{edit.newPage.icon}</f:format.raw>
+				</a></f:if>
+				<f:if condition="{edit.movePage}"><a href="{edit.movePage.url}">
+					<f:format.raw>{edit.movePage.icon}</f:format.raw>
+				</a></f:if>
+				<f:if condition="{edit.editPageProperties}"><a href="{edit.editPageProperties.url}">
+					<f:format.raw>{edit.editPageProperties.icon}</f:format.raw>
+				</a></f:if>
+				<f:if condition="{edit.editTranslation}"><a href="{edit.editTranslation.url}">
+					<f:format.raw>{edit.editTranslation.icon}</f:format.raw>
+				</a></f:if>
+				<f:if condition="{edit.list}"><a href="{edit.list.url}">
+					<f:format.raw>{edit.list.icon}</f:format.raw>
+				</a></f:if>
 			</li>
 			<li title="Preview">
 				<label for="t3-checkbox-showhiddenpages">
-					<f:form.checkbox id="t3-checkbox-showhiddenpages" name="edit[showHiddenPages]" value="1" />Show Hidden Pages<br>
-				</label>
-				<label for="t3-checkbox-showhiddenrecords">
-					<f:form.checkbox id="t3-checkbox-showhiddenrecords" name="edit[showHiddenRecords]" value="1" />Show Hidden Records
-				</label>
+					<f:form.checkbox id="t3-checkbox-showhiddenpages" property="showHiddenPages" value="1" />
+					Show Hidden Pages<br> </label> <label for="t3-checkbox-showhiddenrecords">
+				<f:form.checkbox id="t3-checkbox-showhiddenrecords" property="showHiddenRecords" value="1" />
+				Show Hidden Records </label>
 			</li>
 			<li title="Simulation">
-				Simulate Time <f:form.textfield type="date" name="edit[simulateDate]" value="{dateSimulation}" placeholder="DD.MM.YYYY" /> <f:form.textfield type="time" name="edit[simulateTime]" value="{timeSimulation}" placeholder="HH:ii" /><br>
+				Simulate Time
+				<f:form.textfield type="date" property="simulateDate" placeholder="DD.MM.YYYY" />
+				<f:form.textfield type="time" property="simulateTime" placeholder="HH:ii" />
+				<br>
 				<f:if condition="{edit.frontendUserGroups}">
-					Simulate User Group <f:form.select name="edit[simulateFrontendUserGroup]" options="{edit.frontendUserGroups}" />
+					Simulate User Group
+					<f:form.select property="simulateFrontendUserGroup" options="{edit.frontendUserGroups}" />
 				</f:if>
 			</li>
 		</ul>
 		<ul class="t3-pull-left t3-panel" id="t3-panel-debug" style="display: none;">
 			<li title="TypoScript ADMIN ONLY! ">
-				Debug Information<br>
-				TypoScript
+				Debug Information<br> TypoScript
 			</li>
 		</ul>
+		<f:debug>{form}</f:debug>
 		<ul class="t3-pull-right">
 			<li>
 				<a href="{currentPageLink}" class="t3-link-reload t3-btn">Reload This Page</a>
 				<f:if condition="{displayLogoutLink}">
-					<f:then><a href="typo3/" target="_new" class="t3-btn">Open TYPO3</a>   <a href="{logoutUrl}" class="t3-btn t3-btn-logout">Logout</a></f:then>
-					<f:else><a href="{loginUrl}" class="t3-btn">Login</a></f:else>
+					<f:then><a href="typo3/" target="_new" class="t3-btn">Open TYPO3</a>
+						<a href="{url.logout}" class="t3-btn t3-btn-logout">Logout</a></f:then>
+					<f:else><a href="{url.login}" class="t3-btn">Login</a></f:else>
 				</f:if>
 			</li>
 		</ul>
