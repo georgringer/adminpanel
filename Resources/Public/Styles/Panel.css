@@ -1,0 +1,74 @@
+#t3-panel-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-top: 1px solid #999999;
+  height: 45px;
+  background: #111111;
+  margin: 0;
+  color: #dddddd;
+  font-size: 12px;
+  line-height: 20px;
+  font-family: Arial, sans-serif;
+}
+#t3-panel-container #t3-panel-wrap {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  padding: 2px 0 0 0;
+}
+#t3-panel-container #t3-panel-wrap > ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#t3-panel-container #t3-panel-wrap > ul > li {
+  padding: 0 0 0 10px;
+  margin: 0;
+}
+#t3-panel-container #t3-panel-wrap .t3-dropdown-menu {
+  position: absolute;
+  bottom: 45px;
+  padding-left: 0;
+}
+#t3-panel-container #t3-panel-wrap .t3-dropdown-menu > li {
+  width: 100%;
+  margin: 0 5px;
+  border-bottom: 1px solid #fff;
+}
+#t3-panel-container #t3-panel-wrap .t3-link-reload {
+  display: none;
+}
+#t3-panel-container .t3-pull-left,
+#t3-panel-container .t3-pull-left li {
+  float: left !important;
+}
+#t3-panel-container .t3-pull-right {
+  float: right !important;
+}
+#t3-panel-container .t3-panel-logo {
+  margin: 3px 10px 0 0;
+  height: 35px;
+}
+#t3-panel-container .t3-btn {
+  text-decoration: none;
+  padding: 2px 5px;
+  margin: 7px 5px;
+  background-color: #eb9c35;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+#t3-panel-container .t3-btn.t3-btn-logout {
+  border-color: #b73434;
+  background-color: #c83c3c;
+}
