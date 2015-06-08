@@ -61,7 +61,8 @@ class ConfigurationService {
 			'showHiddenPages' => 'preview_showHiddenPages',
 			'showHiddenRecords' => 'preview_showHiddenRecords',
 			'simulateDate' => 'preview_simulateDate',
-			'simulateFrontendUserGroup' => 'preview_simulateUserGroup'
+			'simulateFrontendUserGroup' => 'preview_simulateUserGroup',
+			'noCaching' => 'cache_noCache',
 		);
 
 		if (is_array($input)) {

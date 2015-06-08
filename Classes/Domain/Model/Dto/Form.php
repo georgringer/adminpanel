@@ -28,6 +28,9 @@ class Form {
 	/** @var boolean */
 	protected $showHiddenRecords = FALSE;
 
+	/** @var boolean */
+	protected $noCaching = FALSE;
+
 	/** @var string */
 	protected $simulateDate = '';
 
@@ -94,5 +97,13 @@ class Form {
 	public function getSimulateFrontendUserGroup() {
 		return $this->simulateFrontendUserGroup;
 	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getNoCaching() {
+		return $this->noCaching;
+	}
+
 
 }
