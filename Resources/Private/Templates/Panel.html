@@ -1,5 +1,6 @@
 <div id="t3-panel-container">
 	<f:form action="#" id="t3-panel-wrap" object="{form}" name="edit">
+		<f:form.hidden property="pageId" value="{pageId}" />
 		<f:form.hidden id="t3-url-ajax" name="url" value="{urls.form}" />
 		<div class="t3-pull-left t3-panel-logo-container">
 			<a href="{backendLink}"><img class="t3-panel-logo" src="typo3/sysext/backend/Resources/Public/Images/typo3-topbar@2x.png"></a>
@@ -47,13 +48,11 @@
 			</ul>
 		</f:if>
 
-		<ul class="t3-pull-left t3-panel" id="t3-panel-previewedit" style="xdisplay: none;">
+		<ul class="t3-pull-left t3-panel" id="t3-panel-previewedit" style="display: none;">
 			<li>
-				TODO: Clear Cache Of This Page<br> TODO: Clear <select>
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-			</select> Levels down from this page <br> <label>
+				Clear Cache <br>
+				<f:form.select property="clearCacheLevels" options="{0:'This page',1:'+1 sublevel',2:'+2 sublevels',3:'+3 sublevels'}" />
+				<br> <label>
 				<f:form.checkbox value="1" property="noCaching" />
 				no caching</label>
 			</li>

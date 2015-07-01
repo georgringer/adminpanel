@@ -16,6 +16,9 @@ namespace TYPO3\CMS\Adminpanel\Domain\Model\Dto;
 
 class Form {
 
+	/** @var int */
+	protected $pageId = 0;
+
 	/** @var boolean */
 	protected $displayIcons = FALSE;
 
@@ -30,6 +33,9 @@ class Form {
 
 	/** @var boolean */
 	protected $noCaching = FALSE;
+
+	/** @var int */
+	protected $clearCacheLevels = 0;
 
 	/** @var string */
 	protected $simulateDate = '';
@@ -105,5 +111,32 @@ class Form {
 		return $this->noCaching;
 	}
 
+	/**
+	 * @return int
+	 */
+	public function getClearCacheLevels() {
+		return $this->clearCacheLevels;
+	}
+
+	/**
+	 * @param int $clearCacheLevels
+	 */
+	public function setClearCacheLevels($clearCacheLevels) {
+		$this->clearCacheLevels = $clearCacheLevels;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getPageId() {
+		return $this->pageId;
+	}
+
+	/**
+	 * @param int $pageId
+	 */
+	public function setPageId($pageId) {
+		$this->pageId = $pageId;
+	}
 
 }

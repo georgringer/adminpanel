@@ -13,6 +13,7 @@ namespace TYPO3\CMS\Adminpanel\Service;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -55,6 +56,10 @@ class ConfigurationService {
 	public function save($parameters, $requestHandler) {
 		$input = GeneralUtility::_GP('edit');
 
+		$this->clearCache($input['pageId'], $input['clearCacheLevels']);
+		unset($input['clearCacheLevels']);
+		unset($input['pageId']);
+
 		$mapping = array(
 			'displayIcons' => 'edit_displayFieldIcons',
 			'displayEditPanels' => 'edit_displayIcons',
@@ -83,5 +88,17 @@ class ConfigurationService {
 		$requestHandler->setContent($input);
 		$requestHandler->setContentFormat('json');
 
+	}
+
+	/**
+	 * @param int $pageId
+	 * @param int $level
+	 * @return void
+	 */
+	protected function clearCache($pageId, $level = 0) {
+		/** @var DataHandler $dataHandler */
+		$dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+		$dataHandler->start(array(), array());
+		$dataHandler->clear_cacheCmd((int)$pageId);
 	}
 }

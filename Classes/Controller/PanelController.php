@@ -152,6 +152,7 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 			'isAdministrator' => $backendUserIsLoggedIn && $this->backendUser->isAdmin(),
 			'currentPageLink' => GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'),
 			'applicationVersion' => TYPO3_version,
+			'pageId' => $GLOBALS['TSFE']->id,
 			'displayLoginLink' => $showLoginWhenNotLoggedIn,
 			'displayLogoutLink' => $backendUserIsLoggedIn,
 			'form' => GeneralUtility::makeInstance(\TYPO3\CMS\Adminpanel\Domain\Model\Dto\Form::class),
