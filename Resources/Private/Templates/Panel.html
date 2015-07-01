@@ -1,3 +1,42 @@
+<table id="t3-panel-table">
+	<tr>
+		<th>TS</th>
+		<th>value</th>
+		<th>time</th>
+		<th>own</th>
+		<th>sub</th>
+		<th>total</th>
+	</tr>
+	<f:for each="{information.timeTracking}" as="line">
+		<tr>
+			<td>
+				<f:if condition="{line.level} > 1">
+					<span style="padding-left:{line.level}0px"></span>
+				</f:if>
+				<f:for each="{line.tsStack}" as="l2">
+					<f:for each="{l2}" as="inner" iteration="i">
+						<f:if condition="{i.index} > 0">/</f:if>
+						{inner}
+					</f:for>
+				</f:for>
+			</td>
+			<td>
+				{line.value}
+			</td>
+			<td>{line.starttime}</td>
+			<td>{line.owntime}</td>
+			<td>
+				<f:if condition="{line.subtime}">+{line.subtime}</f:if>
+			</td>
+			<td>
+				<f:if condition="{line.subtime}">={line.deltatime}</f:if>
+			</td>
+		</tr>
+	</f:for>
+</table>
+<f:debug inline="1">{information.timeTracking}</f:debug><b	r><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
 <div id="t3-panel-container">
 	<f:form action="#" id="t3-panel-wrap" object="{form}" name="edit">
 		<f:form.hidden property="pageId" value="{pageId}" />

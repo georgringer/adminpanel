@@ -13,6 +13,7 @@ namespace TYPO3\CMS\Adminpanel\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -185,6 +186,20 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 		}
 		$rootLine = array_reverse($rootLine);
 
+		/** @var TimeTracker $timeTracker */
+		$timeTracker = $GLOBALS['TT'];
+		// tsStackLog is modified there
+		$timeTracker->printTSlog();
+		$fo = $timeTracker->tsStackLog;
+
+//		foreach ($fo as $uniqueId => &$data) {
+//			$data['endtime'] = $timeTracker->getDifferenceToStarttime($data['endtime']);
+//			$data['starttime'] = $timeTracker->getDifferenceToStarttime($data['starttime']);
+//			$data['deltatime'] = $data['endtime'] - $data['starttime'];
+//			if (is_array($data['tsStack'])) {
+//				$data['key'] = implode($data['stackPointer'] ? '.' : '/', end($data['tsStack']));
+//			}
+//		}
 
 		$content = array(
 			'pageId' => $this->controller->id,
@@ -195,9 +210,13 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 			'loggedInUser' => $loggedInUser,
 			'loggedInGroups' => $loggedInGroups,
 			'isCached' => (bool)!$this->controller->no_cache,
-			'nonCacheableObjects' => count($this->controller->config['INTincScript'])
+			'nonCacheableObjects' => count($this->controller->config['INTincScript']),
+			'timeTracking' => $fo,
 		);
 		$this->view->assignMultiple(array('information' => $content));
+
+
+//print_r($fo);die;
 	}
 
 	/**

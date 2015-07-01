@@ -72,3 +72,29 @@
   border-color: #b73434;
   background-color: #c83c3c;
 }
+
+#t3-panel-table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+#t3-panel-table tr {
+	margin: 0;
+	padding: 0;
+	vertical-align: inherit;
+	border-color: inherit;
+}
+
+#t3-panel-table td {
+	padding: 2px 4px;
+}
+
+#t3-panel-table tr {
+	background-color: #f0f0f0;
+	text-align: left;
+	vertical-align: top;
+}
+
+#t3-panel-table tr:nth-child(odd) {
+	background-color: #ccc;
+}
