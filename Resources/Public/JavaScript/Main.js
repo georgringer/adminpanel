@@ -2,7 +2,7 @@ require.config({
 	// By default load any module IDs from js/lib
 	baseUrl: 'typo3/',
 	paths: {
-		jquery: 'contrib/jquery/jquery-1.11.2'
+		jquery: 'sysext/core/Resources/Public/JavaScript/Contrib/jquery/jquery-1.11.3.min'
 	}
 });
 

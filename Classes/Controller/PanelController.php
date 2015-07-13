@@ -127,11 +127,12 @@ class PanelController implements \TYPO3\CMS\Core\SingletonInterface {
 		if ($backendUserIsLoggedIn) {
 			$this->setInformationArea();
 			$this->setEditAndPreviewArea();
+
+			$content = $this->view->render('Panel');
+			$this->controller->content = str_ireplace('</body>', $content . '</body>', $this->controller->content);
 		}
 
-		$content = $this->view->render('Panel');
 
-		$this->controller->content = str_ireplace('</body>', $content . '</body>', $this->controller->content);
 	}
 
 	/**
