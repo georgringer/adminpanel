@@ -1,32 +1,26 @@
+body {
+  margin-right: 450px;
+}
 #t3-panel-container {
-  position: absolute;
-  min-width: 250px;
-  left: 300px;
-  top: 50px;
-  background: #eee;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 450px;
+  border-top: 1px solid #999;
+  background: #111;
   margin: 0;
-  color: #000;
+  color: #ddd;
   font-size: 12px;
   line-height: 20px;
   font-family: Arial, sans-serif;
 }
-#t3-panel-container #t3-panel-bar {
-  background: #000;
-  color: #fff;
-  font-weight: bold;
-  padding: 3px 5px;
-}
-#t3-panel-container #t3-panel-sections .t3-panel-section-title {
-  background: #ccc;
-}
-#t3-panel-container #t3-panel-sections .t3-panel-section-title a {
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-}
 #t3-panel-container #t3-panel-wrap {
+  position: absolute;
   left: 10px;
   right: 10px;
+  padding: 2px 0 0 0;
 }
 #t3-panel-container #t3-panel-wrap > ul {
   padding: 0;
@@ -72,15 +66,19 @@
   border-color: #b73434;
   background-color: #c83c3c;
 }
+#t3-panel-container .t3-pull-left,
+#t3-panel-container .t3-pull-left li {
+  float: left !important;
+}
 #t3-panel-container .t3-panel-logo {
   margin: 3px 10px 0 0;
   height: 35px;
 }
-#t3-panel-container .t3-panel-table {
+#t3-panel-container #t3-panel-table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-#t3-panel-container .t3-panel-table tr {
+#t3-panel-container #t3-panel-table tr {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
@@ -88,11 +86,11 @@
   vertical-align: top;
   border-color: inherit;
 }
-#t3-panel-container .t3-panel-table tr:nth-child(odd) {
+#t3-panel-container #t3-panel-table tr:nth-child(odd) {
   background-color: #ccc;
 }
-#t3-panel-container .t3-panel-table th,
-#t3-panel-container .t3-panel-table td {
+#t3-panel-container #t3-panel-table th,
+#t3-panel-container #t3-panel-table td {
   padding: 2px 4px;
   font-size: 12px;
   color: #000;

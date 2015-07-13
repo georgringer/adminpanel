@@ -47,10 +47,14 @@ class Form {
 	protected $simulateFrontendUserGroup = '';
 
 	public function __construct() {
-		$data = $GLOBALS['BE_USER']->uc['adminPanel'];
-		foreach ($data as $key => $value) {
-			if (property_exists($this, $key)) {
-				$this->$key = $value;
+		if (is_object(($GLOBALS['BE_USER']))) {
+			$data = $GLOBALS['BE_USER']->uc['adminPanel'];
+			if (is_array($data)) {
+				foreach ($data as $key => $value) {
+					if (property_exists($this, $key)) {
+						$this->$key = $value;
+					}
+				}
 			}
 		}
 	}

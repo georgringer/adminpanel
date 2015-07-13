@@ -1,32 +1,23 @@
 #t3-panel-container {
-  position: absolute;
-  min-width: 250px;
-  left: 300px;
-  top: 50px;
-  background: #eee;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-top: 1px solid #999;
+  height: 45px;
+  background: #111;
   margin: 0;
-  color: #000;
+  color: #ddd;
   font-size: 12px;
   line-height: 20px;
   font-family: Arial, sans-serif;
 }
-#t3-panel-container #t3-panel-bar {
-  background: #000;
-  color: #fff;
-  font-weight: bold;
-  padding: 3px 5px;
-}
-#t3-panel-container #t3-panel-sections .t3-panel-section-title {
-  background: #ccc;
-}
-#t3-panel-container #t3-panel-sections .t3-panel-section-title a {
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-}
 #t3-panel-container #t3-panel-wrap {
+  position: absolute;
   left: 10px;
   right: 10px;
+  padding: 2px 0 0 0;
 }
 #t3-panel-container #t3-panel-wrap > ul {
   padding: 0;
@@ -39,7 +30,7 @@
 }
 #t3-panel-container #t3-panel-wrap .t3-dropdown-menu {
   position: absolute;
-  top: 45px;
+  bottom: 45px;
   padding-left: 0;
 }
 #t3-panel-container #t3-panel-wrap .t3-dropdown-menu > li {
@@ -57,7 +48,7 @@
   text-decoration: none;
   padding: 2px 5px;
   margin: 7px 5px;
-  background: #eb9c35;
+  background-color: #eb9c35;
   color: #fff;
   display: inline-block;
   font-weight: normal;
@@ -65,6 +56,7 @@
   vertical-align: middle;
   touch-action: manipulation;
   cursor: pointer;
+  background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
 }
@@ -72,15 +64,19 @@
   border-color: #b73434;
   background-color: #c83c3c;
 }
+#t3-panel-container .t3-pull-left,
+#t3-panel-container .t3-pull-left li {
+  float: left !important;
+}
 #t3-panel-container .t3-panel-logo {
   margin: 3px 10px 0 0;
   height: 35px;
 }
-#t3-panel-container .t3-panel-table {
+#t3-panel-table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-#t3-panel-container .t3-panel-table tr {
+#t3-panel-table tr {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
@@ -88,12 +84,9 @@
   vertical-align: top;
   border-color: inherit;
 }
-#t3-panel-container .t3-panel-table tr:nth-child(odd) {
+#t3-panel-table tr:nth-child(odd) {
   background-color: #ccc;
 }
-#t3-panel-container .t3-panel-table th,
-#t3-panel-container .t3-panel-table td {
+#t3-panel-table td {
   padding: 2px 4px;
-  font-size: 12px;
-  color: #000;
 }

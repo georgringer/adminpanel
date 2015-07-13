@@ -1,0 +1,119 @@
+#t3-panel-container {
+  position: absolute;
+  min-width: 250px;
+  left: 300px;
+  top: 50px;
+
+  background: #eee;
+  margin: 0;
+  color: #000;
+  font-size: 12px;
+  line-height: 20px;
+  font-family: Arial, sans-serif;
+
+  #t3-panel-bar {
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    padding: 3px 5px;
+  }
+
+  #t3-panel-sections {
+    .t3-panel-section-title {
+      background: #ccc;
+      a {
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+    }
+  }
+
+  #t3-panel-wrap {
+
+    //    position: absolute;
+    left: 10px;
+    right: 10px;
+  }
+
+  #t3-panel-wrap > ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  #t3-panel-wrap > ul > li {
+    padding: 0 0 0 10px;
+    margin: 0;
+  }
+
+  #t3-panel-wrap .t3-dropdown-menu {
+    position: absolute;
+    top: 45px;
+    padding-left: 0;
+  }
+
+  #t3-panel-wrap .t3-dropdown-menu > li {
+    width: 100%;
+    margin: 0 5px;
+    border-bottom: 1px solid #fff;
+  }
+
+  #t3-panel-wrap .t3-link-reload {
+    display: none;
+  }
+
+  .t3-pull-right {
+    float: right !important;
+  }
+  .t3-btn {
+    text-decoration: none;
+    padding: 2px 5px;
+    margin: 7px 5px;
+    background: #eb9c35;
+    color: #fff;
+    display: inline-block;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .t3-btn.t3-btn-logout {
+    border-color: #b73434;
+    background-color: #c83c3c;
+  }
+
+  .t3-panel-logo {
+    margin: 3px 10px 0 0;
+    height: 35px;
+  }
+
+  .t3-panel-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    tr {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      text-align: left;
+      vertical-align: top;
+      border-color: inherit;
+    }
+    tr:nth-child(odd) {
+      background-color: #ccc;
+    }
+
+    th, td {
+      padding: 2px 4px;
+      font-size: 12px;
+      color: #000;
+    }
+  }
+}
+
